@@ -1,5 +1,9 @@
 #include "Game.hpp"
 #include "textureManager.hpp"
+#include "GameObjects.hpp"
+
+GameObjects* player;
+GameObjects* enemy;
 
 int cnt = 0;
 
@@ -33,21 +37,20 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
 }
 
 void Game::start(){
-  player = TextureManager::loadTexture("media/player.png", renderer);
-  destR.w = 64;
-  destR.h = 64;
+  player = new GameObjects("media/player.png", renderer, 0, 0);
+  enemy = new GameObjects("media/enemy.png", renderer, 50, 50);
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, player, NULL, &destR);
+  player->renderer();
+  enemy->renderer();
   SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
-  SDL_DestroyTexture(player);
   SDL_Quit();
   cout << "Game Cleaned" << endl;
 }
@@ -69,7 +72,7 @@ void Game::handleEvents() {
 bool Game::running() { return isRunning; }
 
 void Game::update() {
-  cnt++;
-  destR.x = cnt;
+  player->update();
+  enemy->update();
   SDL_UpdateWindowSurface(window);
 }

@@ -26,8 +26,6 @@ private:
   bool isRunning = true;
   SDL_Window *window;
   SDL_Renderer *renderer;
-  SDL_Texture *player;
-
 };
 
 #endif /* Game_hpp */
