@@ -1,15 +1,37 @@
-//
-//  main.cpp
-//  Game Project
-//
-//  Created by Andres J Fuster on 9/10/19.
-//  Copyright © 2019 Anonymous. All rights reserved.
-//
+#include "Game.hpp"
 
-#include <iostream>
+Game *game = nullptr;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+int main(int argc, const char *argv[]) {
+
+  game = new Game();
+
+  game->init("Game 2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800,
+             600, false);
+    
+  game->start();
+  
+  const int fps = 60;
+  const int frameDelay = 1000/fps;
+  Uint32 frameStart;
+  int frameTime;
+
+  while (game->running()) {
+    
+    frameStart = SDL_GetTicks();
+    
+    game->handleEvents();
+    game->render();
+    game->update();
+    
+    frameTime = SDL_GetTicks() - frameStart;
+    if(frameDelay > frameTime)
+    {
+      SDL_Delay(frameDelay - frameTime);
+    }
+  }
+
+  game->clean();
+
+  return 0;
 }
