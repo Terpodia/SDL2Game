@@ -20,12 +20,11 @@ public:
   void handleEvents();
   bool running();
 
-
+  static SDL_Renderer* renderer;
 
 private:
   bool isRunning = true;
   SDL_Window *window;
-  SDL_Renderer *renderer;
 };
 
 #endif /* Game_hpp */

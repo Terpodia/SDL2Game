@@ -1,7 +1,7 @@
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 
 
-SDL_Texture* TextureManager::loadTexture(const char* textureRoute, SDL_Renderer* ren)
+SDL_Texture* TextureManager::loadTexture(const char* textureRoute)
 {
     SDL_Surface* tmpSurface = IMG_Load(textureRoute);
     
@@ -10,8 +10,13 @@ SDL_Texture* TextureManager::loadTexture(const char* textureRoute, SDL_Renderer*
     }
     
     SDL_SetColorKey(tmpSurface, SDL_TRUE, SDL_MapRGB(tmpSurface->format,0xFF, 0xFF, 0xFF));
-    SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, tmpSurface);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
     SDL_FreeSurface(tmpSurface);
     
     return tex;
+}
+
+void TextureManager::Draw(SDL_Texture* tex, SDL_Rect destR)
+{
+    SDL_RenderCopy(Game::renderer, tex, NULL, &destR);
 }

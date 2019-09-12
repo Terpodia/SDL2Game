@@ -1,10 +1,9 @@
 #include "GameObjects.hpp"
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 
-GameObjects::GameObjects(const char* texturesheet, SDL_Renderer* ren, int x, int y)
+GameObjects::GameObjects(const char* texturesheet, int x, int y)
 {
-    render = ren;
-    objTexture = TextureManager::loadTexture(texturesheet, ren);
+    objTexture = TextureManager::loadTexture(texturesheet);
     
     xpos = x;
     ypos = y;
@@ -28,6 +27,6 @@ void GameObjects::update()
 
 void GameObjects::renderer()
 {
-    if (SDL_RenderCopy(render, objTexture, NULL, &destR) != 0)
-        printf("Ocurrio un error en la mierda esa, %s ", SDL_GetError());
+    if (SDL_RenderCopy(Game::renderer, objTexture, NULL, &destR) != 0)
+        printf("Ocurrio un error, %s ", SDL_GetError());
 }
