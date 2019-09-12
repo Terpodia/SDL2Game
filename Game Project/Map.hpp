@@ -18,6 +18,7 @@ private:
     SDL_Texture* water;
     SDL_Texture* brick;
     SDL_Texture* ground;
+    SDL_Texture* sky;
 
     int map [20][26];
 

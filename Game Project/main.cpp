@@ -6,7 +6,7 @@ int main(int argc, const char *argv[]) {
 
   game = new Game();
 
-  game->init("Game 2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800,
+  game->init("Game 2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 780,
              600, false);
     
   game->start();
