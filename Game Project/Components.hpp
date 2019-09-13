@@ -10,8 +10,8 @@ private:
     int ypos;
     
 public:
-    int x(){return x;}
-    int y(){return y;}
+    int x(){return xpos;}
+    int y(){return ypos;}
     
     void setPosition(int x, int y)
     {
@@ -19,13 +19,13 @@ public:
         ypos = y;
     }
     
-    void init()override
+    void init() override
     {
         xpos = 0;
         ypos = 0;
     }
     
-    void update()override
+    void update() override
     {
         xpos++;
         ypos++;

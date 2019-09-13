@@ -13,15 +13,22 @@ using namespace std;
 class Component;
 class Entity;
 
-using componentID = size_t;
+using ComponentID = size_t;
 
-inline componentID getComponentTypeID()
+inline ComponentID getComponentTypeID()
 {
-    static ComponentID typeID = getComponentTypeID();
-    return typeID();
+    static ComponentID lastID = 0;
+    return lastID++;
 }
 
-contexpr size_t maxComponents = 32;
+template <typename T>
+inline ComponentID getComponentTypeID() noexcept
+{
+    static ComponentID typeID = getComponentTypeID();
+    return typeID;
+}
+
+constexpr size_t maxComponents = 32;
 
 using ComponentBitSet = bitset<maxComponents>;
 using ComponentArray = array<Component*, maxComponents>;
@@ -45,7 +52,7 @@ private:
     
     vector<unique_ptr<Component>> components;
     ComponentArray componentArray;
-    ComponentBitset componentBitset;
+    ComponentBitSet componentBitset;
     
 public:
     void update()
@@ -62,7 +69,7 @@ public:
     {
         T* c(new T(forward<TArgs>(mArgs)...));
         c->entity = this;
-        unique _ptr<Component> uPtr{c};
+        unique_ptr<Component> uPtr{c};
         components.emplace_back(move(uPtr));
         
         componentArray[getComponentTypeID<T>()] = c;
@@ -74,7 +81,7 @@ public:
     
     template <typename T>T& getComponent() const
     {
-        auto ptr(componentAray[getComponentTypeID<T>()]);
+        auto ptr(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(ptr);
     }
 };
@@ -87,18 +94,26 @@ private:
 public:
     void update()
     {
-        for(auto& e: entities)e->update();
-        for(auto& e: entities)e->draw();
+        for(auto& e : entities)e->update();
+    }
+    
+    void draw()
+    {
+        for(auto& e : entities)e->draw();
     }
     
     void refresh()
     {
-        entities.erase(remove_if(begin(entities), end(entities), [](const unique_ptr<Entity>)&mEntity)
-                       {
-                           return !mEntity->isActive();
-                       }),
-        end(entities);
+        entities.erase(remove_if(
+                                 begin(entities),
+                                 end(entities),
+                                 [](const unique_ptr<Entity> &mEntity)
+                                 {
+                                     return !mEntity->isActive();
+                                 }),
+                                end(entities));
     }
+    
     Entity& addEntity()
     {
         Entity* e = new Entity();
@@ -108,4 +123,5 @@ public:
     }
 };
 
+ 
 #endif /* ECS_hpp */
