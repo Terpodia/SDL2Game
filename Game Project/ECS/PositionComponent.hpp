@@ -2,40 +2,37 @@
 #define PositionComponent_hpp
 
 #include "Components.hpp"
+#include "../Vector2D.hpp"
 
 class PositionComponent : public Component
 {
-private:
-    int xpos;
-    int ypos;
-    
 public:
+
+    Vector2D position;
     
     PositionComponent()
     {
-        xpos = 0;
-        ypos = 0;
+        position.x = 0.0f;
+        position.y = 0.0f;
     }
     
-    PositionComponent(int x, int y)
+    PositionComponent(float x, float y)
     {
-        xpos = x;
-        ypos = y;
+        position.x = x;
+        position.x = y;
     }
     
-    int x(){return xpos;}
-    int y(){return ypos;}
     
-    void setPosition(int x, int y)
+    void setPosition(float x, float y)
     {
-        xpos = x;
-        ypos = y;
+        position.x = x;
+        position.y = y;
     }
     
     void update() override
     {
-        xpos++;
-        ypos++;
+       
+        
     }
 };
 

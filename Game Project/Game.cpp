@@ -81,8 +81,9 @@ void Game::update() {
   
   manager.refresh();
   manager.update();
+  player.getComponent<PositionComponent>().position.add(Vector2D(5,0));
   
-  if(player.getComponent<PositionComponent>().x() > 300)
+  if(player.getComponent<PositionComponent>().position.x > 300)
   {
     player.getComponent<SpriteComponent>().setTexture("media/enemy.png");
   }

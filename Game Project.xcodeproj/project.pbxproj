@@ -13,6 +13,7 @@
 		AB0DB6D5232806F8008C9932 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6D3232806F8008C9932 /* main.cpp */; };
 		AB0DB6D823285373008C9932 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6D723285373008C9932 /* TextureManager.cpp */; };
 		AB0DB6DC2328AAD5008C9932 /* GameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */; };
+		AB1141CF232D3460006AEA20 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB1141CE232D3460006AEA20 /* Vector2D.cpp */; };
 		ABE9177B2329ADA20005BEA4 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABE9177A2329ADA20005BEA4 /* Map.cpp */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,8 @@
 		AB0DB6D723285373008C9932 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		AB0DB6D92328A450008C9932 /* GameObjects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = GameObjects.hpp; path = ../GameObjects.hpp; sourceTree = "<group>"; };
 		AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjects.cpp; sourceTree = "<group>"; };
+		AB1141CD232D325E006AEA20 /* Vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector2D.hpp; sourceTree = "<group>"; };
+		AB1141CE232D3460006AEA20 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2D.cpp; sourceTree = "<group>"; };
 		ABE917792329A9BD0005BEA4 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		ABE9177A2329ADA20005BEA4 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		ABE9177E232C64CD0005BEA4 /* ECS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ECS; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				AB0DB6D92328A450008C9932 /* GameObjects.hpp */,
 				ABE9177A2329ADA20005BEA4 /* Map.cpp */,
 				ABE917792329A9BD0005BEA4 /* Map.hpp */,
+				AB1141CE232D3460006AEA20 /* Vector2D.cpp */,
+				AB1141CD232D325E006AEA20 /* Vector2D.hpp */,
 				AB0DB6D723285373008C9932 /* TextureManager.cpp */,
 				AB0DB6D623284FF2008C9932 /* TextureManager.hpp */,
 				AB0DB6CF2328032F008C9932 /* media */,
@@ -161,6 +166,7 @@
 			files = (
 				AB0DB6DC2328AAD5008C9932 /* GameObjects.cpp in Sources */,
 				ABE9177B2329ADA20005BEA4 /* Map.cpp in Sources */,
+				AB1141CF232D3460006AEA20 /* Vector2D.cpp in Sources */,
 				AB0DB6D5232806F8008C9932 /* main.cpp in Sources */,
 				AB0DB6D4232806F8008C9932 /* Game.cpp in Sources */,
 				AB0DB6D823285373008C9932 /* TextureManager.cpp in Sources */,

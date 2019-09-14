@@ -34,8 +34,8 @@ public:
     
     void update() override
     {
-        destRect.x = position->x();
-        destRect.y = position->y();
+        destRect.x = (int)position->position.x;
+        destRect.y = (int)position->position.y;
     }
     
     void draw() override
