@@ -42,8 +42,7 @@
 		AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjects.cpp; sourceTree = "<group>"; };
 		ABE917792329A9BD0005BEA4 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		ABE9177A2329ADA20005BEA4 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		ABE9177C232A816C0005BEA4 /* ECS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ECS.hpp; sourceTree = "<group>"; };
-		ABE9177D232AB0110005BEA4 /* Components.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Components.hpp; sourceTree = "<group>"; };
+		ABE9177E232C64CD0005BEA4 /* ECS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ECS; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +78,12 @@
 		AB0DB6C023280058008C9932 /* Game Project */ = {
 			isa = PBXGroup;
 			children = (
+				ABE9177E232C64CD0005BEA4 /* ECS */,
 				AB0DB6D3232806F8008C9932 /* main.cpp */,
 				AB0DB6D1232806F8008C9932 /* Game.cpp */,
 				AB0DB6D2232806F8008C9932 /* Game.hpp */,
-				ABE9177D232AB0110005BEA4 /* Components.hpp */,
 				AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */,
 				AB0DB6D92328A450008C9932 /* GameObjects.hpp */,
-				ABE9177C232A816C0005BEA4 /* ECS.hpp */,
 				ABE9177A2329ADA20005BEA4 /* Map.cpp */,
 				ABE917792329A9BD0005BEA4 /* Map.hpp */,
 				AB0DB6D723285373008C9932 /* TextureManager.cpp */,
