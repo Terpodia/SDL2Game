@@ -69,7 +69,7 @@ public:
     template <typename T,typename... TArgs>
     T& addComponent(TArgs&&... mArgs)
     {
-        T* c(new T(forward<TArgs>(mArgs)...));
+        T* c (new T(forward<TArgs>(mArgs)...));
         c->entity = this;
         unique_ptr<Component> uPtr{c};
         components.emplace_back(move(uPtr));
@@ -85,6 +85,12 @@ public:
     {
         auto ptr(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(ptr);
+    }
+    
+    template <typename T> bool hasComponent() const
+    {
+        auto ptr(componentArray[getComponentTypeID<T>()]);
+        return static_cast<T*>(ptr) != NULL;
     }
 };
 

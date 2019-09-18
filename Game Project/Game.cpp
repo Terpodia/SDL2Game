@@ -2,13 +2,16 @@
 #include "textureManager.hpp"
 #include "Map.hpp"
 #include "ECS/Components.hpp"
+#include "ECS/Collider.h"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto& player (manager.addEntity());
+auto& wall (manager.addEntity());
 
 SDL_Rect destR;
 Game::Game() {}
@@ -43,8 +46,15 @@ void Game::start(){
   
   map = new Map();
   
-  player.addComponent<PositionComponent>();
+  player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
   player.addComponent<SpriteComponent>("media/player.png");
+  player.addComponent<KeyboardController>();
+  player.addComponent<ColliderComponent>("player");
+
+  wall.addComponent<TransformComponent>();
+  wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
+  wall.addComponent<SpriteComponent>("media/brick.png");
+  wall.addComponent<ColliderComponent>("wall");
 }
 
 void Game::render() {
@@ -62,7 +72,6 @@ void Game::clean() {
 }
 
 void Game::handleEvents() {
-  SDL_Event event;
   SDL_PollEvent(&event);
 
   switch (event.type) {
@@ -81,11 +90,15 @@ void Game::update() {
   
   manager.refresh();
   manager.update();
-  player.getComponent<PositionComponent>().position.add(Vector2D(5,0));
   
-  if(player.getComponent<PositionComponent>().position.x > 300)
+  SDL_Rect a = player.getComponent<ColliderComponent>().collider;
+  SDL_Rect b = wall.getComponent<ColliderComponent>().collider;
+  
+  
+  if(Collision::AABB(a, b, 5.0f))
   {
-    player.getComponent<SpriteComponent>().setTexture("media/enemy.png");
+    player.getComponent<TransformComponent>().velocity * -0.5f;
+    cout << "Wall hit" << endl;
   }
   
   SDL_UpdateWindowSurface(window);

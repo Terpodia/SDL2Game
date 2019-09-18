@@ -3,12 +3,12 @@
 
 #include "Components.hpp"
 #include <SDL2/SDL.h>
-#include "TextureManager.hpp"
+#include "../TextureManager.hpp"
 
 class SpriteComponent : public Component
 {
 private:
-    PositionComponent *position;
+    TransformComponent *transform;
     SDL_Texture *texture;
     SDL_Rect destRect;
     
@@ -19,6 +19,11 @@ public:
         setTexture(path);
     }
     
+    ~SpriteComponent()
+    {
+        SDL_DestroyTexture(texture);
+    }
+    
     void setTexture(const char* path)
     {
         texture = TextureManager::loadTexture(path);
@@ -26,16 +31,21 @@ public:
     
     void init() override
     {
-        position = &entity->getComponent<PositionComponent>();
+        transform = &entity->getComponent<TransformComponent>();
         
-        destRect.w = destRect.h = 64;
-        destRect.x = destRect.y = 0;
+        if (transform == NULL){
+            cout << "Transform Component has not found" << endl;
+        }
+            
     }
     
     void update() override
     {
-        destRect.x = (int)position->position.x;
-        destRect.y = (int)position->position.y;
+        destRect.x = static_cast<int>(transform->position.x);
+        destRect.y = static_cast<int>(transform->position.y);
+        destRect.w = transform->width * transform->scale;
+        destRect.h = transform->height * transform->scale;
+
     }
     
     void draw() override
