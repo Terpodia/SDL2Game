@@ -5,17 +5,33 @@
 #include "TransformComponent.hpp"
 #include "GameSprite.hpp"
 #include <SDL2/SDL.h>
+#include "../TextureManager.hpp"
 
 class TileComponent : public Component
 {
 public:
     
-    char *path;
+    static SDL_Texture* grass;
+    static SDL_Texture* water;
+    static SDL_Texture* brick;
+    static SDL_Texture* ground;
+    static SDL_Texture* sky;
+    
+    SDL_Texture* texture;
+    
     TransformComponent *transform;
     SpriteComponent *sprite;
     
     SDL_Rect tileRect;
     int tileID;
+    
+    static void PreLoadTextures(){
+        grass = TextureManager::loadTexture("media/grass.png");
+        water = TextureManager::loadTexture("media/water.png");
+        brick = TextureManager::loadTexture("media/brick.png");
+        ground = TextureManager::loadTexture("media/ground.png");
+        sky = TextureManager::loadTexture("media/sky.png");
+    }
     
     TileComponent() = default;
     
@@ -30,23 +46,23 @@ public:
         switch(tileID)
         {
             case 1:
-                path = "media/grass.png";
+                texture = grass;
                 break;
                 
             case 2:
-                path = "media/water.png";
+                texture = water;
                 break;
                 
             case 3:
-                path = "media/brick.png";
+                texture = brick;
                 break;
                 
             case 4:
-                path = "media/ground.png";
+                texture = ground;
                 break;
                 
             default:
-                path = "media/sky.png";
+                texture = sky;
                 break;
         }
     }
@@ -58,25 +74,10 @@ public:
         
         transform = &entity->getComponent<TransformComponent>();
         
-        entity->addComponent<SpriteComponent>(path);
-        
+        entity->addComponent<SpriteComponent>(texture);
         sprite = &entity->getComponent<SpriteComponent>();
     }
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif /* TileComponent_h */

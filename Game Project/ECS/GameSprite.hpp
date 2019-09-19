@@ -19,6 +19,11 @@ public:
         setTexture(path);
     }
     
+    SpriteComponent(SDL_Texture* texture)
+    {
+        setTexture(texture);
+    }
+    
     ~SpriteComponent()
     {
         SDL_DestroyTexture(texture);
@@ -27,6 +32,11 @@ public:
     void setTexture(const char* path)
     {
         texture = TextureManager::loadTexture(path);
+    }
+    
+    void setTexture(SDL_Texture* texture)
+    {
+        this->texture = texture;
     }
     
     void init() override

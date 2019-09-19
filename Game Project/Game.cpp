@@ -12,7 +12,7 @@ std::vector<ColliderComponent*>  Game::colliders;
 
 Manager manager;
 
-auto& player (manager.addEntity());
+Entity& player (manager.addEntity());
 auto& wall (manager.addEntity());
 
 SDL_Rect destR;
@@ -44,11 +44,19 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
   }
 }
 
+SDL_Texture* TileComponent::grass = NULL;
+SDL_Texture* TileComponent::water = NULL;
+SDL_Texture* TileComponent::brick = NULL;
+SDL_Texture* TileComponent::ground = NULL;
+SDL_Texture* TileComponent::sky = NULL;
+
 void Game::start(){
   
-  map = new Map();
-  
   //ECS Implementation
+  
+  TileComponent::PreLoadTextures();
+  
+  Map::loadMap("media/Map.txt", 20, 26);
   
   wall.addComponent<TransformComponent>();
   wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
@@ -60,16 +68,14 @@ void Game::start(){
   player.addComponent<SpriteComponent>("media/player.png");
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
-
-  
   
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
-  map->drawMap();
+  
   manager.draw();
-    SDL_RenderPresent(renderer);
+  SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
@@ -105,14 +111,11 @@ void Game::update() {
     if(cc->tag != "player")
     {
       Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-    
     }
     
       //player.getComponent<TransformComponent>().velocity * -0.5f;
       //cout << "Wall hit" << endl;
-
   }
-
   
   SDL_UpdateWindowSurface(window);
 }
@@ -122,3 +125,6 @@ void Game::addTile(int ID, int x, int y)
   auto& tile(manager.addEntity());
   tile.addComponent<TileComponent>(x, y, 32, 32, ID);
 }
+
+
+
