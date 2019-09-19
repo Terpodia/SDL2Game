@@ -6,5 +6,6 @@
 #include "GameSprite.hpp"
 #include "KeyBoardController.hpp"
 #include "ColliderComponent.hpp"
+#include "TileComponent.h"
 
 #endif /* Components_hpp */

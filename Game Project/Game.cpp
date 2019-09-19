@@ -8,8 +8,10 @@ Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+std::vector<ColliderComponent*>  Game::colliders;
 
 Manager manager;
+
 auto& player (manager.addEntity());
 auto& wall (manager.addEntity());
 
@@ -46,15 +48,21 @@ void Game::start(){
   
   map = new Map();
   
+  //ECS Implementation
+  
+  wall.addComponent<TransformComponent>();
+  wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
+  wall.addComponent<SpriteComponent>("media/brick.png");
+  wall.addComponent<ColliderComponent>("wall");
+  
+  
   player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
   player.addComponent<SpriteComponent>("media/player.png");
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
 
-  wall.addComponent<TransformComponent>();
-  wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
-  wall.addComponent<SpriteComponent>("media/brick.png");
-  wall.addComponent<ColliderComponent>("wall");
+  
+  
 }
 
 void Game::render() {
@@ -91,15 +99,26 @@ void Game::update() {
   manager.refresh();
   manager.update();
   
-  SDL_Rect a = player.getComponent<ColliderComponent>().collider;
-  SDL_Rect b = wall.getComponent<ColliderComponent>().collider;
-  
-  
-  if(Collision::AABB(a, b, 5.0f))
+  for(auto cc : colliders)
   {
-    player.getComponent<TransformComponent>().velocity * -0.5f;
-    cout << "Wall hit" << endl;
+    
+    if(cc->tag != "player")
+    {
+      Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
+    
+    }
+    
+      //player.getComponent<TransformComponent>().velocity * -0.5f;
+      //cout << "Wall hit" << endl;
+
   }
+
   
   SDL_UpdateWindowSurface(window);
+}
+
+void Game::addTile(int ID, int x, int y)
+{
+  auto& tile(manager.addEntity());
+  tile.addComponent<TileComponent>(x, y, 32, 32, ID);
 }

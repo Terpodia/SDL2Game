@@ -1,11 +1,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <iostream>
+#include <vector>
 
 #ifndef Game_hpp
 #define Game_hpp
 
 using namespace std;
+
+class ColliderComponent;
 
 class Game {
 public:
@@ -20,8 +23,10 @@ public:
   void handleEvents();
   bool running();
 
+  static void addTile(int ID, int x, int y);
   static SDL_Renderer* renderer;
   static SDL_Event event;
+  static std::vector<ColliderComponent*> colliders;
 
 private:
   bool isRunning = true;
