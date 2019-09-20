@@ -73,7 +73,7 @@ void Game::start(){
   
   
   player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
-  player.addComponent<SpriteComponent>("media/Characters/player.png");
+  player.addComponent<SpriteComponent>("media/Characters/wizard/idle.png", 3, 300, 74, 74);
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
   player.addGroup(groupPlayers);
