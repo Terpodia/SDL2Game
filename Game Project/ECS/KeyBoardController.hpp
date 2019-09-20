@@ -9,11 +9,13 @@ class KeyboardController: public Component
 {
 public:
     
+    SpriteComponent *sprite;
     TransformComponent *transform;
     
     void init()
     {
         transform = &entity->getComponent<TransformComponent>();
+        sprite = &entity->getComponent<SpriteComponent>();
     }
     
     void update()
@@ -23,16 +25,20 @@ public:
             switch (Game::event.key.keysym.sym) {
                 case SDLK_w:
                     transform->velocity.y = -1;
+                    sprite->play("Walk");
                     break;
                 case SDLK_a:
                     transform->velocity.x = -1;
+                    sprite->play("Walk");
                     break;
                     
                 case SDLK_s:
                     transform->velocity.y = 1;
+                    sprite->play("Walk");
                     break;
                     
                 case SDLK_d:
+                    sprite->play("Walk");
                     transform->velocity.x = 1;
                     
                 default:
@@ -45,17 +51,21 @@ public:
             switch (Game::event.key.keysym.sym) {
                 case SDLK_w:
                     transform->velocity.y = 0;
+                    sprite->play("Idle");
                     break;
                 case SDLK_a:
                     transform->velocity.x = 0;
+                    sprite->play("Idle");
                     break;
                     
                 case SDLK_s:
                     transform->velocity.y = 0;
+                    sprite->play("Idle");
                     break;
                     
                 case SDLK_d:
                     transform->velocity.x = 0;
+                    sprite->play("Idle");
                     
                 default:
                     break;

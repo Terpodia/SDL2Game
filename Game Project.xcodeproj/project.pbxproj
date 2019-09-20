@@ -55,6 +55,7 @@
 		ABECC7B5233473F700A209FF /* KeyBoardController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = KeyBoardController.hpp; path = ECS/KeyBoardController.hpp; sourceTree = "<group>"; };
 		ABECC7B6233473F700A209FF /* TileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileComponent.h; path = ECS/TileComponent.h; sourceTree = "<group>"; };
 		ABECC7B7233473F700A209FF /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TransformComponent.hpp; path = ECS/TransformComponent.hpp; sourceTree = "<group>"; };
+		ABECC7B923352DB500A209FF /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +120,7 @@
 		ABECC7AE233473DE00A209FF /* ECS */ = {
 			isa = PBXGroup;
 			children = (
+				ABECC7B923352DB500A209FF /* Animation.h */,
 				ABECC7AF233473F700A209FF /* Collider.h */,
 				ABECC7B0233473F700A209FF /* ColliderComponent.hpp */,
 				ABECC7B1233473F700A209FF /* Components.hpp */,

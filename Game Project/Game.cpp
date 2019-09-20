@@ -70,14 +70,19 @@ void Game::start(){
   wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
   wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
   wall.addComponent<ColliderComponent>("wall");
-  
-  
+  wall.addGroup(groupMap);
+
   player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
-  player.addComponent<SpriteComponent>("media/Characters/wizard/idle.png", 3, 300, 74, 74);
+  Animation idle = Animation(74, 74, 3, 300, "media/Characters/wizard/idle.png");
+  Animation walk = Animation(78, 74, 4, 100, "media/Characters/wizard/walk.png");
+  map<const char*, Animation> playerAnims;
+  playerAnims.emplace("Idle", idle);
+  playerAnims.emplace("Walk", walk);
+  
+  player.addComponent<SpriteComponent>(playerAnims);
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
   player.addGroup(groupPlayers);
-  wall.addGroup(groupMap);
 }
 
 auto& tiles(manager.getGroup(groupMap));
