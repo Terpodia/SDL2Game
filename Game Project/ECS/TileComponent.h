@@ -26,11 +26,11 @@ public:
     int tileID;
     
     static void PreLoadTextures(){
-        grass = TextureManager::loadTexture("media/grass.png");
-        water = TextureManager::loadTexture("media/water.png");
-        brick = TextureManager::loadTexture("media/brick.png");
-        ground = TextureManager::loadTexture("media/ground.png");
-        sky = TextureManager::loadTexture("media/sky.png");
+        grass = TextureManager::loadTexture("media/Tiles/_32/grass_32.png");
+        water = TextureManager::loadTexture("media/Tiles/_32/water_32.png");
+        brick = TextureManager::loadTexture("media/Tiles/_32/brick_32.png");
+        ground = TextureManager::loadTexture("media/Tiles/_32/ground_32.png");
+        sky = TextureManager::loadTexture("media/Tiles/_32/sky_32.png");
     }
     
     TileComponent() = default;
