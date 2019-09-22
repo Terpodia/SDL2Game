@@ -20,6 +20,8 @@ private:
     int speed = 100;
     
 public:
+    SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+        
     int animIndex = 0;
     
     std::map<const char*, Animation> animations;
@@ -94,7 +96,7 @@ public:
         if (!animated)
             TextureManager::Draw(texture, destRect);
         else
-            TextureManager::Draw(texture, scrRect, destRect);
+            TextureManager::Draw(texture, scrRect, destRect, spriteFlip );
     }
             
     void play(const char* animName)

@@ -65,16 +65,16 @@ void Game::start(){
   TileComponent::PreLoadTextures();
   
   Map::loadMap("media/Map.txt", 20, 26);
-  
+/*
   wall.addComponent<TransformComponent>();
   wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
   wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
   wall.addComponent<ColliderComponent>("wall");
   wall.addGroup(groupMap);
-
+*/
   player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
-  Animation idle = Animation(74, 74, 3, 300, "media/Characters/wizard/idle.png");
-  Animation walk = Animation(78, 74, 4, 100, "media/Characters/wizard/walk.png");
+  Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
+  Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
   map<const char*, Animation> playerAnims;
   playerAnims.emplace("Idle", idle);
   playerAnims.emplace("Walk", walk);
@@ -138,6 +138,16 @@ void Game::update() {
   manager.refresh();
   manager.update();
   
+  Vector2D pVel = player.getComponent<TransformComponent>().velocity;
+  int pSpeed = player.getComponent<TransformComponent>().speed;
+  
+  for(auto t : tiles)
+  {
+
+    t->getComponent<TransformComponent>().position.x += -(pVel.x * pSpeed);
+    t->getComponent<TransformComponent>().position.y += -(pVel.y * pSpeed);
+  }
+  
   for(auto cc : colliders)
   {
     
@@ -156,7 +166,7 @@ void Game::update() {
 void Game::addTile(int ID, int x, int y)
 {
   auto& tile(manager.addEntity());
-  tile.addComponent<TileComponent>(x, y, 32, 32, ID);
+  tile.addComponent<TileComponent>(x, y, 64, 64, ID);
   tile.addGroup(groupMap);
 }
 
