@@ -79,14 +79,10 @@ public:
     void update() override
     {
         if(animated)
-        {
             scrRect.x = scrRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-        }
-        
-//        scrRect.y = animIndex * transform->height;
-        
-        destRect.x = static_cast<int>(transform->position.x);
-        destRect.y = static_cast<int>(transform->position.y);
+            
+        destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
+        destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = transform->width * transform->scale;
         destRect.h = transform->height * transform->scale;
     }

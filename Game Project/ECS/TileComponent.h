@@ -22,6 +22,7 @@ public:
     TransformComponent *transform;
     SpriteComponent *sprite;
     
+    Vector2D position;
     SDL_Rect tileRect;
     int tileID;
     
@@ -34,9 +35,22 @@ public:
     }
     
     TileComponent() = default;
-    
+    ~TileComponent()
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyTexture(grass);
+        SDL_DestroyTexture(water);
+        SDL_DestroyTexture(sky);
+        SDL_DestroyTexture(brick);
+        SDL_DestroyTexture(ground);
+
+
+    }
     TileComponent(int x, int y, int w, int h, int ID)
     {
+        position.x = x;
+        position.y = y;
+        
         tileRect.x = x;
         tileRect.y = y;
         tileRect.w = w;
@@ -67,6 +81,11 @@ public:
         }
     }
     
+    void update() override
+    {
+        tileRect.x = position.x - Game::camera.x;
+        tileRect.y = position.y - Game::camera.y;
+    }
     
     void init() override
     {

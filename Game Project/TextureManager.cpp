@@ -25,3 +25,7 @@ void TextureManager::Draw(SDL_Texture* tex, SDL_Rect scrR, SDL_Rect destR, SDL_R
 {
     SDL_RenderCopyEx(Game::renderer, tex, &scrR, &destR, NULL, NULL, flip);
 }
+
+TextureManager::~TextureManager()
+{
+}

@@ -8,6 +8,10 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<ColliderComponent*>  Game::colliders;
 
+bool Game::isRunning = true;
+
+SDL_Rect Game:: camera = {0, 0, 780, 600};
+
 Manager manager;
 
 auto& player (manager.addEntity());
@@ -65,13 +69,13 @@ void Game::start(){
   TileComponent::PreLoadTextures();
   
   Map::loadMap("media/Map.txt", 20, 26);
-/*
+
   wall.addComponent<TransformComponent>();
-  wall.addComponent<TransformComponent>(300.0f, 390.0f, 120, 120, 1);
-  wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
+  wall.addComponent<TransformComponent>(0.0f, 1089.0f, 32, 1640, 1);
+//  wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
   wall.addComponent<ColliderComponent>("wall");
   wall.addGroup(groupMap);
-*/
+
   player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
   Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
   Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
@@ -135,18 +139,10 @@ bool Game::running() { return isRunning; }
 
 void Game::update() {
   
+  Vector2D playerPos = player.getComponent<TransformComponent>().position;
+
   manager.refresh();
   manager.update();
-  
-  Vector2D pVel = player.getComponent<TransformComponent>().velocity;
-  int pSpeed = player.getComponent<TransformComponent>().speed;
-  
-  for(auto t : tiles)
-  {
-
-    t->getComponent<TransformComponent>().position.x += -(pVel.x * pSpeed);
-    t->getComponent<TransformComponent>().position.y += -(pVel.y * pSpeed);
-  }
   
   for(auto cc : colliders)
   {
@@ -154,11 +150,35 @@ void Game::update() {
     if(cc->tag != "player")
     {
       if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc))
-        player.getComponent<TransformComponent>().velocity * -1.5f;
+        player.getComponent<TransformComponent>().position = playerPos;
     }
     
-      //cout << "Wall hit" << endl;
+    //cout << "Wall hit" << endl;
   }
+  
+  camera.x = player.getComponent<TransformComponent>().position.x;
+  camera.y = player.getComponent<TransformComponent>().position.y;
+  
+  if(camera.x < 0)
+  {
+    camera.x = 0;
+  }
+  
+  if(camera.y < 0)
+  {
+    camera.y = 0;
+  }
+  
+  if(camera.x > camera.w)
+  {
+    camera.x = camera.w;
+  }
+  
+  if(camera.y > camera.h)
+  {
+    camera.y = camera.h;
+  }
+  
   
   SDL_UpdateWindowSurface(window);
 }
