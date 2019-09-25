@@ -9,6 +9,8 @@ public:
     Map();
     ~Map();
     static void loadMap(std::string path, int sizeX, int sizeY);
+    static void loadColliders(std::string path, int sizeX, int sizeY);
+
 };
 
 #endif /* Map_hpp */

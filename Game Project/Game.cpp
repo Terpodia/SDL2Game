@@ -18,6 +18,7 @@ auto& player (manager.addEntity());
 auto& wall (manager.addEntity());
 
 SDL_Rect destR;
+const int offset = 200;
 
 enum groupLabels : size_t
 {
@@ -69,14 +70,14 @@ void Game::start(){
   TileComponent::PreLoadTextures();
   
   Map::loadMap("media/Map.txt", 20, 26);
+  Map::loadColliders("media/Colliders.txt", 20, 26);
 
-  wall.addComponent<TransformComponent>();
-  wall.addComponent<TransformComponent>(0.0f, 1089.0f, 32, 1640, 1);
-//  wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
-  wall.addComponent<ColliderComponent>("wall");
-  wall.addGroup(groupMap);
+//  wall.addComponent<TransformComponent>(0.0f, 1089.0f, 32, 1640, 1);
+//  // wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
+//  wall.addComponent<ColliderComponent>("wall");
+//  wall.addGroup(groupMap);
 
-  player.addComponent<TransformComponent>(0.0f, 0.0f, 64, 64, 1);
+  player.addComponent<TransformComponent>(500.0f, 1033.0f, 64, 64, 1);
   Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
   Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
   map<const char*, Animation> playerAnims;
@@ -156,8 +157,8 @@ void Game::update() {
     //cout << "Wall hit" << endl;
   }
   
-  camera.x = player.getComponent<TransformComponent>().position.x;
-  camera.y = player.getComponent<TransformComponent>().position.y;
+  camera.x = player.getComponent<TransformComponent>().position.x - offset;
+  camera.y = player.getComponent<TransformComponent>().position.y - offset;
   
   if(camera.x < 0)
   {
@@ -190,5 +191,12 @@ void Game::addTile(int ID, int x, int y)
   tile.addGroup(groupMap);
 }
 
+void Game::addCol(int ID, int x, int y)
+{
+  auto& col(manager.addEntity());
+  col.addComponent<TransformComponent>(x, y, 64, 64, ID);
+  col.addComponent<ColliderComponent>("Collider");
+  col.addGroup(groupColliders);
 
+}
 
