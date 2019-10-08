@@ -2,6 +2,7 @@
 #include <SDL2_image/SDL_image.h>
 #include <iostream>
 #include <vector>
+#include "AssetManager.hpp"
 
 #ifndef Game_hpp
 #define Game_hpp
@@ -9,6 +10,7 @@
 using namespace std;
 
 class ColliderComponent;
+class AssetManager;
 
 class Game {
 public:
@@ -31,6 +33,18 @@ public:
   static std::vector<ColliderComponent*> colliders;
   static bool isRunning;
   static SDL_Rect camera;
+  
+  static AssetManager* assets;
+  
+  enum groupLabels : size_t
+  {
+    groupMap,
+    groupPlayers,
+    groupEnemies,
+    groupColliders,
+    groupProjectiles
+  };
+  
 private:
   SDL_Window *window;
 };

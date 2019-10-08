@@ -3,6 +3,9 @@
 #include "Map.hpp"
 #include "ECS/Components.hpp"
 #include "ECS/Collider.h"
+#include "AssetManager.hpp"
+
+
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -13,20 +16,15 @@ bool Game::isRunning = true;
 SDL_Rect Game:: camera = {0, 0, 780, 600};
 
 Manager manager;
+AssetManager* Game::assets = new AssetManager(&manager);
 
 auto& player (manager.addEntity());
 auto& wall (manager.addEntity());
+auto& assetMan (manager.addEntity());
 
 SDL_Rect destR;
 const int offset = 200;
 
-enum groupLabels : size_t
-{
-  groupMap,
-  groupPlayers,
-  groupEnemies,
-  groupColliders
-};
 
 Game::Game() {}
 
@@ -51,6 +49,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
       SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
       cout << "Renderer Created!" << endl;
       isRunning = true;
+    
     }
   } else {
     isRunning = false;
@@ -72,27 +71,25 @@ void Game::start(){
   Map::loadMap("media/Map.txt", 20, 26);
   Map::loadColliders("media/Colliders.txt", 20, 26);
 
-//  wall.addComponent<TransformComponent>(0.0f, 1089.0f, 32, 1640, 1);
-//  // wall.addComponent<SpriteComponent>("media/Tiles/Original/brick.png");
-//  wall.addComponent<ColliderComponent>("wall");
-//  wall.addGroup(groupMap);
-
   player.addComponent<TransformComponent>(500.0f, 1033.0f, 64, 64, 1);
   Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
   Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
   map<const char*, Animation> playerAnims;
   playerAnims.emplace("Idle", idle);
   playerAnims.emplace("Walk", walk);
-  
   player.addComponent<SpriteComponent>(playerAnims);
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
   player.addGroup(groupPlayers);
+
+  Game::assets->CreateProjectile(Vector2D(500, 1033), "media/Projectiles/ball.jpg");
+
 }
 
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemies));
+auto& tiles(manager.getGroup(Game::groupMap));
+auto& players(manager.getGroup(Game::groupPlayers));
+auto& enemies(manager.getGroup(Game::groupEnemies));
+auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::render() {
   
@@ -110,6 +107,11 @@ void Game::render() {
   for(auto& e : enemies)
   {
     e->draw();
+  }
+  
+  for(auto& i : projectiles)
+  {
+    i->draw();
   }
 
   
