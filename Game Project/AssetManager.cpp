@@ -22,9 +22,11 @@ void AssetManager::CreateProjectile(Vector2D pos, const char* path)
 {
     auto& projectile(manager->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1);
-    projectile.addComponent<SpriteComponent>().setTexture(path);
+    projectile.addComponent<SpriteComponent>(path);
     projectile.addComponent<ColliderComponent>("projectile");
     
     projectile.addComponent<ProjectileComponent>(100, 2, Vector2D(2, 0));
     projectile.addGroup(Game::groupProjectiles);
+    
+    
 }

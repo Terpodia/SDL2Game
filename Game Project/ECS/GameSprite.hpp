@@ -53,6 +53,7 @@ public:
     
     ~SpriteComponent()
     {
+        SDL_DestroyTexture(texture);
     }
     
     void setTexture(const char* path)
@@ -91,7 +92,7 @@ public:
         if (!animated)
             TextureManager::Draw(texture, destRect);
         else
-            TextureManager::Draw(texture, scrRect, destRect, spriteFlip );
+            TextureManager::Draw(texture, scrRect, destRect, spriteFlip);
     }
             
     void play(const char* animName)

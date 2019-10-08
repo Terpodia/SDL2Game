@@ -44,7 +44,6 @@ public:
         SDL_DestroyTexture(brick);
         SDL_DestroyTexture(ground);
 
-
     }
     TileComponent(int x, int y, int w, int h, int ID)
     {

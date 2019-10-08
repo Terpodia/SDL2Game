@@ -7,6 +7,7 @@
 #include "Vector2D.hpp"
 #include "ECS/ECS.hpp"
 #include "Components.hpp"
+#include "Game.hpp"
 
 class AssetManager
 {

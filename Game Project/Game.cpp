@@ -5,8 +5,6 @@
 #include "ECS/Collider.h"
 #include "AssetManager.hpp"
 
-
-
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<ColliderComponent*>  Game::colliders;
@@ -67,10 +65,9 @@ void Game::start(){
   //ECS Implementation
   
   TileComponent::PreLoadTextures();
-  
   Map::loadMap("media/Map.txt", 20, 26);
   Map::loadColliders("media/Colliders.txt", 20, 26);
-
+  
   player.addComponent<TransformComponent>(500.0f, 1033.0f, 64, 64, 1);
   Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
   Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
@@ -81,8 +78,8 @@ void Game::start(){
   player.addComponent<KeyboardController>();
   player.addComponent<ColliderComponent>("player");
   player.addGroup(groupPlayers);
-
-  Game::assets->CreateProjectile(Vector2D(500, 1033), "media/Projectiles/ball.jpg");
+  
+  Game::assets->CreateProjectile(Vector2D(500, 900), "media/Projectiles/soccer.png");
 
 }
 
@@ -114,7 +111,6 @@ void Game::render() {
     i->draw();
   }
 
-  
   SDL_RenderPresent(renderer);
 }
 
@@ -150,11 +146,20 @@ void Game::update() {
   for(auto cc : colliders)
   {
     
-    if(cc->tag != "player")
-    {
-      if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc))
-        player.getComponent<TransformComponent>().position = playerPos;
-    }
+//    if(cc->tag != "player")
+//    {
+//
+//      if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc))
+//        player.getComponent<TransformComponent>().position = playerPos;
+//    }
+    
+//    for(auto& p : projectiles)
+//    {
+//      if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc)){
+//        p->destroy();
+//      }
+//
+//    }
     
     //cout << "Wall hit" << endl;
   }

@@ -71,7 +71,7 @@ public:
         for(auto& c: components) c->draw();
     }
     bool isActive()const {return active;}
-    void destroy(){active = false;}
+    void destroy(){ active = false; }
     
     bool hasGroup(Group mGroup)
     {
@@ -122,12 +122,16 @@ private:
 public:
     void update()
     {
-        for(auto& e : entities)e->update();
+        for(auto& e : entities)
+            if (e->isActive())
+                e->update();
     }
     
     void draw()
     {
-        for(auto& e : entities)e->draw();
+        for(auto& e : entities)
+            if (e->isActive())
+                e->draw();
     }
     
     void refresh()
@@ -143,8 +147,7 @@ public:
                         }),
                     end(v));
         }
-        
-        
+             
         entities.erase(remove_if(
                                  begin(entities),
                                  end(entities),

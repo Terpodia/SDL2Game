@@ -23,7 +23,9 @@ void TextureManager::Draw(SDL_Texture* tex, SDL_Rect destR)
 
 void TextureManager::Draw(SDL_Texture* tex, SDL_Rect scrR, SDL_Rect destR, SDL_RendererFlip flip)
 {
-    SDL_RenderCopyEx(Game::renderer, tex, &scrR, &destR, NULL, NULL, flip);
+    if (SDL_RenderCopyEx(Game::renderer, tex, &scrR, &destR, NULL, NULL, flip) != 0){
+        printf("A error was happen loading the player %s", SDL_GetError());
+    }
 }
 
 TextureManager::~TextureManager()
