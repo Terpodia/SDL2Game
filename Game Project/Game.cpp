@@ -7,7 +7,6 @@
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
-std::vector<ColliderComponent*>  Game::colliders;
 
 bool Game::isRunning = true;
 
@@ -22,7 +21,6 @@ auto& assetMan (manager.addEntity());
 
 SDL_Rect destR;
 const int offset = 200;
-
 
 Game::Game() {}
 
@@ -86,31 +84,15 @@ void Game::start(){
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
 auto& enemies(manager.getGroup(Game::groupEnemies));
+auto& colliders(manager.getGroup(Game::groupColliders));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::render() {
-  
   SDL_RenderClear(renderer);
-  for(auto& t : tiles)
-  {
-    t->draw();
-  }
-
-  for(auto& p : players)
-  {
-    p->draw();
-  }
-
-  for(auto& e : enemies)
-  {
-    e->draw();
-  }
-  
-  for(auto& i : projectiles)
-  {
-    i->draw();
-  }
-
+  for(auto& t : tiles) t->draw();
+  for(auto& p : players) p->draw();
+  for(auto& e : enemies) e->draw();
+  for(auto& i : projectiles) i->draw();
   SDL_RenderPresent(renderer);
 }
 
@@ -138,30 +120,29 @@ bool Game::running() { return isRunning; }
 
 void Game::update() {
   
+  SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
   Vector2D playerPos = player.getComponent<TransformComponent>().position;
-
+  
+  
   manager.refresh();
   manager.update();
   
-  for(auto cc : colliders)
+  for (auto& c : colliders)
   {
-    
-//    if(cc->tag != "player")
-//    {
-//
-//      if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc))
-//        player.getComponent<TransformComponent>().position = playerPos;
-//    }
-    
-//    for(auto& p : projectiles)
-//    {
-//      if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc)){
-//        p->destroy();
-//      }
-//
-//    }
-    
-    //cout << "Wall hit" << endl;
+    SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
+    if (Collision::AABB(cCol, playerCol, 5))
+    {
+      player.getComponent<TransformComponent>().position = playerPos;
+    }
+  }
+  
+  for (auto& p : projectiles)
+  {
+    if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider, 5))
+    {
+      std::cout << "Hit player!" << std::endl;
+      p->destroy();
+    }
   }
   
   camera.x = player.getComponent<TransformComponent>().position.x - offset;

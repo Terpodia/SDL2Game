@@ -18,6 +18,10 @@ public:
        tag = t;
     }
     
+    ~ColliderComponent()
+    {
+    }
+    
     void init() override
     {
         if(!entity->hasComponent<TransformComponent>()){
@@ -25,7 +29,6 @@ public:
         }
         
         transform = &entity->getComponent<TransformComponent>();
-        Game::colliders.push_back(this);
     }
     
     void update() override
