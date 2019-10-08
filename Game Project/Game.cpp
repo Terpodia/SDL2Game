@@ -17,7 +17,6 @@ AssetManager* Game::assets = new AssetManager(&manager);
 
 auto& player (manager.addEntity());
 auto& wall (manager.addEntity());
-auto& assetMan (manager.addEntity());
 
 SDL_Rect destR;
 const int offset = 200;
@@ -66,7 +65,7 @@ void Game::start(){
   Map::loadMap("media/Map.txt", 20, 26);
   Map::loadColliders("media/Colliders.txt", 20, 26);
   
-  player.addComponent<TransformComponent>(500.0f, 1033.0f, 64, 64, 1);
+  player.addComponent<TransformComponent>(500.0f, 1020.0f, 64, 64, 1);
   Animation idle = Animation(74, 74, 3, 400, "media/Characters/wizard/idle.png");
   Animation walk = Animation(78, 74, 4, 300, "media/Characters/wizard/walk.png");
   map<const char*, Animation> playerAnims;
@@ -118,58 +117,13 @@ void Game::handleEvents() {
 
 bool Game::running() { return isRunning; }
 
-void Game::update() {
+void Game::addCol(int ID, int x, int y)
+{
+  auto& col(manager.addEntity());
+  col.addComponent<TransformComponent>(x, y, 64, 64, ID);
+  col.addComponent<ColliderComponent>("Collider");
+  col.addGroup(groupColliders);
   
-  SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
-  Vector2D playerPos = player.getComponent<TransformComponent>().position;
-  
-  
-  manager.refresh();
-  manager.update();
-  
-  for (auto& c : colliders)
-  {
-    SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
-    if (Collision::AABB(cCol, playerCol, 5))
-    {
-      player.getComponent<TransformComponent>().position = playerPos;
-    }
-  }
-  
-  for (auto& p : projectiles)
-  {
-    if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider, 5))
-    {
-      std::cout << "Hit player!" << std::endl;
-      p->destroy();
-    }
-  }
-  
-  camera.x = player.getComponent<TransformComponent>().position.x - offset;
-  camera.y = player.getComponent<TransformComponent>().position.y - offset;
-  
-  if(camera.x < 0)
-  {
-    camera.x = 0;
-  }
-  
-  if(camera.y < 0)
-  {
-    camera.y = 0;
-  }
-  
-  if(camera.x > camera.w)
-  {
-    camera.x = camera.w;
-  }
-  
-  if(camera.y > camera.h)
-  {
-    camera.y = camera.h;
-  }
-  
-  
-  SDL_UpdateWindowSurface(window);
 }
 
 void Game::addTile(int ID, int x, int y)
@@ -179,12 +133,45 @@ void Game::addTile(int ID, int x, int y)
   tile.addGroup(groupMap);
 }
 
-void Game::addCol(int ID, int x, int y)
-{
-  auto& col(manager.addEntity());
-  col.addComponent<TransformComponent>(x, y, 64, 64, ID);
-  col.addComponent<ColliderComponent>("Collider");
-  col.addGroup(groupColliders);
-
+void Game::update() {
+  
+  SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
+  Vector2D playerPos = player.getComponent<TransformComponent>().position;
+  
+  manager.refresh();
+  manager.update();
+  
+  for (auto& c : colliders)
+  {
+    SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
+    
+    if (Collision::AABB(cCol, playerCol, 5))
+    {
+      player.getComponent<TransformComponent>().position = playerPos;
+    }
+    
+    for (auto& p : projectiles)
+    {
+      if (Collision::AABB(cCol, p->getComponent<ColliderComponent>().collider, 5))
+      {
+        std::cout << "Hit!" << std::endl;
+        p->destroy();
+      }
+    }
+  }
+  
+  camera.x = player.getComponent<TransformComponent>().position.x - offset;
+  camera.y = player.getComponent<TransformComponent>().position.y - offset;
+  
+  if(camera.x < 0) camera.x = 0;
+  if(camera.y < 0) camera.y = 0;
+  if(camera.x > camera.w) camera.x = camera.w;
+  if(camera.y > camera.h) camera.y = camera.h;
+  
+  SDL_UpdateWindowSurface(window);
 }
+
+
+
+
 

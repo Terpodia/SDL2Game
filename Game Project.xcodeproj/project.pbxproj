@@ -12,10 +12,10 @@
 		AB0DB6D4232806F8008C9932 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6D1232806F8008C9932 /* Game.cpp */; };
 		AB0DB6D5232806F8008C9932 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6D3232806F8008C9932 /* main.cpp */; };
 		AB0DB6D823285373008C9932 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6D723285373008C9932 /* TextureManager.cpp */; };
-		AB0DB6DC2328AAD5008C9932 /* GameObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */; };
 		AB1141CF232D3460006AEA20 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB1141CE232D3460006AEA20 /* Vector2D.cpp */; };
 		ABECC7A2233313A500A209FF /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABECC7A1233313A500A209FF /* Map.cpp */; };
 		ABECC7B8233473F700A209FF /* ECS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABECC7B2233473F700A209FF /* ECS.cpp */; };
+		ABECC7BD233BA5A900A209FF /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABECC7BC233BA5A900A209FF /* AssetManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,8 +40,6 @@
 		AB0DB6D3232806F8008C9932 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; tabWidth = 2; };
 		AB0DB6D623284FF2008C9932 /* TextureManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
 		AB0DB6D723285373008C9932 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
-		AB0DB6D92328A450008C9932 /* GameObjects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = GameObjects.hpp; path = ../GameObjects.hpp; sourceTree = "<group>"; };
-		AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjects.cpp; sourceTree = "<group>"; };
 		AB1141CD232D325E006AEA20 /* Vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector2D.hpp; sourceTree = "<group>"; };
 		AB1141CE232D3460006AEA20 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2D.cpp; sourceTree = "<group>"; };
 		ABE917792329A9BD0005BEA4 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
@@ -56,6 +54,9 @@
 		ABECC7B6233473F700A209FF /* TileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileComponent.h; path = ECS/TileComponent.h; sourceTree = "<group>"; };
 		ABECC7B7233473F700A209FF /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TransformComponent.hpp; path = ECS/TransformComponent.hpp; sourceTree = "<group>"; };
 		ABECC7B923352DB500A209FF /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		ABECC7BB233BA47000A209FF /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
+		ABECC7BC233BA5A900A209FF /* AssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		ABECC7BE233BB65C00A209FF /* ProjectileComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectileComponent.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +96,11 @@
 				AB0DB6D3232806F8008C9932 /* main.cpp */,
 				AB0DB6D1232806F8008C9932 /* Game.cpp */,
 				AB0DB6D2232806F8008C9932 /* Game.hpp */,
-				AB0DB6DA2328AAD5008C9932 /* GameObjects.cpp */,
-				AB0DB6D92328A450008C9932 /* GameObjects.hpp */,
 				ABECC7A1233313A500A209FF /* Map.cpp */,
 				ABE917792329A9BD0005BEA4 /* Map.hpp */,
 				AB1141CE232D3460006AEA20 /* Vector2D.cpp */,
+				ABECC7BB233BA47000A209FF /* AssetManager.hpp */,
+				ABECC7BC233BA5A900A209FF /* AssetManager.cpp */,
 				AB1141CD232D325E006AEA20 /* Vector2D.hpp */,
 				AB0DB6D723285373008C9932 /* TextureManager.cpp */,
 				AB0DB6D623284FF2008C9932 /* TextureManager.hpp */,
@@ -127,8 +128,9 @@
 				ABECC7B2233473F700A209FF /* ECS.cpp */,
 				ABECC7B3233473F700A209FF /* ECS.hpp */,
 				ABECC7B4233473F700A209FF /* GameSprite.hpp */,
-				ABECC7B5233473F700A209FF /* KeyBoardController.hpp */,
+				ABECC7BE233BB65C00A209FF /* ProjectileComponent.hpp */,
 				ABECC7B6233473F700A209FF /* TileComponent.h */,
+				ABECC7B5233473F700A209FF /* KeyBoardController.hpp */,
 				ABECC7B7233473F700A209FF /* TransformComponent.hpp */,
 			);
 			name = ECS;
@@ -192,9 +194,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABECC7A2233313A500A209FF /* Map.cpp in Sources */,
-				AB0DB6DC2328AAD5008C9932 /* GameObjects.cpp in Sources */,
 				AB1141CF232D3460006AEA20 /* Vector2D.cpp in Sources */,
 				ABECC7B8233473F700A209FF /* ECS.cpp in Sources */,
+				ABECC7BD233BA5A900A209FF /* AssetManager.cpp in Sources */,
 				AB0DB6D5232806F8008C9932 /* main.cpp in Sources */,
 				AB0DB6D4232806F8008C9932 /* Game.cpp in Sources */,
 				AB0DB6D823285373008C9932 /* TextureManager.cpp in Sources */,

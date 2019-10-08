@@ -25,7 +25,7 @@ void AssetManager::CreateProjectile(Vector2D pos, const char* path)
     projectile.addComponent<SpriteComponent>(path);
     projectile.addComponent<ColliderComponent>("projectile");
     
-    projectile.addComponent<ProjectileComponent>(100, 2, Vector2D(2, 0));
+    projectile.addComponent<ProjectileComponent>(1000, 2, Vector2D(1, 0));
     projectile.addGroup(Game::groupProjectiles);
     
     

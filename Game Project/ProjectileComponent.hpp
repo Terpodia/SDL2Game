@@ -15,13 +15,12 @@ public:
     
     ProjectileComponent(int rng, int sp, Vector2D vec) : range(rng), speed(sp), vector(vec)
     {
-
+        
     }
     
     void init() override
     {
         transform = &entity->getComponent<TransformComponent>();
-       //transform->vector = vector;
     }
     
     void update() override
@@ -33,14 +32,9 @@ public:
             entity->destroy();
         }
         
-//        else if(transform->position.x > Game::camera.x + Game::camera.w ||
-//                transform->position.x < Game::camera.x ||
-//                transform->position.y > Game::camera.y + Game::camera.h ||
-//                transform->position.y < Game::camera.y)
-//        {
-//            entity->destroy();
-//        }
-      
+        
+        transform->velocity.x = vector.x;
+        transform->velocity.y = vector.y;
     }
     
     

@@ -22,7 +22,7 @@ public:
     {
         if(AABB(colA.collider, colB.collider, 5.0f))
         {
-            std::cout << colA.tag << " Hit: " << colB.tag << std::endl;
+//            std::cout << colA.tag << " Hit: " << colB.tag << std::endl;
             return true;
         }
     
