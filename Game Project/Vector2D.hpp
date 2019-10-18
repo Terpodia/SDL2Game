@@ -2,6 +2,7 @@
 #define Vector2D_hpp
 
 #include <iostream>
+#include <math.h>
 
 class Vector2D
 {
@@ -30,6 +31,8 @@ public:
     Vector2D& operator*(const float& i);
     
     Vector2D& zero();
+    
+    float magnitude();
 
     friend std::ostream& operator<<(std::ostream& stream, const Vector2D vec);
 };

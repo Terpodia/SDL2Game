@@ -3,7 +3,8 @@
 
 #include "ECS.hpp"
 #include "TransformComponent.hpp"
-#include "GameSprite.hpp"
+#include "IAAgentComponent.hpp"
+#include "SpriteComponent.hpp"
 #include "KeyBoardController.hpp"
 #include "ColliderComponent.hpp"
 #include "TileComponent.h"

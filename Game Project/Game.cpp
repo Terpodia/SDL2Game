@@ -16,6 +16,7 @@ Manager manager;
 AssetManager* Game::assets = new AssetManager(&manager);
 
 auto& player (manager.addEntity());
+auto& IA (manager.addEntity());
 auto& wall (manager.addEntity());
 
 SDL_Rect destR;
@@ -76,8 +77,15 @@ void Game::start(){
   player.addComponent<ColliderComponent>("player");
   player.addGroup(groupPlayers);
   
-  Game::assets->CreateProjectile(Vector2D(500, 900), "media/Projectiles/soccer.png");
 
+  IA.addComponent<IAAgentComponent>(Vector2D(400.0f, 1020.0f),&player.getComponent<TransformComponent>().position, 3, "media/Characters/player.png", 2);
+  IA.addGroup(groupIA);
+  
+  Game::assets->CreateProjectile(Vector2D(500, 900), "media/Projectiles/soccer.png");
+  Game::assets->CreateProjectile(Vector2D(400, 900), "media/Projectiles/soccer.png");
+  Game::assets->CreateProjectile(Vector2D(600, 900), "media/Projectiles/soccer.png");
+  Game::assets->CreateProjectile(Vector2D(700, 900), "media/Projectiles/soccer.png");
+  Game::assets->CreateProjectile(Vector2D(300, 900), "media/Projectiles/soccer.png");
 }
 
 auto& tiles(manager.getGroup(Game::groupMap));
@@ -85,6 +93,7 @@ auto& players(manager.getGroup(Game::groupPlayers));
 auto& enemies(manager.getGroup(Game::groupEnemies));
 auto& colliders(manager.getGroup(Game::groupColliders));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
+auto& IAs(manager.getGroup(Game::groupIA));
 
 void Game::render() {
   SDL_RenderClear(renderer);
@@ -92,6 +101,7 @@ void Game::render() {
   for(auto& p : players) p->draw();
   for(auto& e : enemies) e->draw();
   for(auto& i : projectiles) i->draw();
+  for(auto& j : IAs) j->draw();
   SDL_RenderPresent(renderer);
 }
 

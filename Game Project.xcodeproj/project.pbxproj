@@ -42,6 +42,8 @@
 		AB0DB6D723285373008C9932 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		AB1141CD232D325E006AEA20 /* Vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector2D.hpp; sourceTree = "<group>"; };
 		AB1141CE232D3460006AEA20 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2D.cpp; sourceTree = "<group>"; };
+		AB3D45BF234ED4A000C9D9F9 /* IAAgentComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IAAgentComponent.hpp; sourceTree = "<group>"; };
+		AB3D45C0234F956F00C9D9F9 /* SpriteComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = SpriteComponent.hpp; path = ECS/SpriteComponent.hpp; sourceTree = "<group>"; };
 		ABE917792329A9BD0005BEA4 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		ABECC7A1233313A500A209FF /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		ABECC7AF233473F700A209FF /* Collider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collider.h; path = ECS/Collider.h; sourceTree = "<group>"; };
@@ -49,7 +51,6 @@
 		ABECC7B1233473F700A209FF /* Components.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Components.hpp; path = ECS/Components.hpp; sourceTree = "<group>"; };
 		ABECC7B2233473F700A209FF /* ECS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ECS.cpp; path = ECS/ECS.cpp; sourceTree = "<group>"; };
 		ABECC7B3233473F700A209FF /* ECS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ECS.hpp; path = ECS/ECS.hpp; sourceTree = "<group>"; };
-		ABECC7B4233473F700A209FF /* GameSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GameSprite.hpp; path = ECS/GameSprite.hpp; sourceTree = "<group>"; };
 		ABECC7B5233473F700A209FF /* KeyBoardController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = KeyBoardController.hpp; path = ECS/KeyBoardController.hpp; sourceTree = "<group>"; };
 		ABECC7B6233473F700A209FF /* TileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileComponent.h; path = ECS/TileComponent.h; sourceTree = "<group>"; };
 		ABECC7B7233473F700A209FF /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TransformComponent.hpp; path = ECS/TransformComponent.hpp; sourceTree = "<group>"; };
@@ -122,12 +123,13 @@
 			isa = PBXGroup;
 			children = (
 				ABECC7B923352DB500A209FF /* Animation.h */,
+				AB3D45BF234ED4A000C9D9F9 /* IAAgentComponent.hpp */,
 				ABECC7AF233473F700A209FF /* Collider.h */,
 				ABECC7B0233473F700A209FF /* ColliderComponent.hpp */,
 				ABECC7B1233473F700A209FF /* Components.hpp */,
 				ABECC7B2233473F700A209FF /* ECS.cpp */,
 				ABECC7B3233473F700A209FF /* ECS.hpp */,
-				ABECC7B4233473F700A209FF /* GameSprite.hpp */,
+				AB3D45C0234F956F00C9D9F9 /* SpriteComponent.hpp */,
 				ABECC7BE233BB65C00A209FF /* ProjectileComponent.hpp */,
 				ABECC7B6233473F700A209FF /* TileComponent.h */,
 				ABECC7B5233473F700A209FF /* KeyBoardController.hpp */,

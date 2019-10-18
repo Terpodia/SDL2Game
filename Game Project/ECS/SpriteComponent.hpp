@@ -1,11 +1,12 @@
-#ifndef GameSprite_hpp
-#define GameSprite_hpp
+#ifndef SpriteComponent_hpp
+#define SpriteComponent_hpp
 
 #include "Components.hpp"
 #include <SDL2/SDL.h>
 #include "../TextureManager.hpp"
 #include "Animation.h"
 #include <map>
+
 
 class SpriteComponent : public Component
 {
@@ -68,23 +69,22 @@ public:
     
     void init() override
     {
-        transform = &entity->getComponent<TransformComponent>();
-        
-        if (transform == NULL){
-            cout << "Transform Component has not found" << endl;
+        if (entity->hasComponent<TransformComponent>()){
+            transform = &entity->getComponent<TransformComponent>();
         }
-            
     }
     
     void update() override
     {
         if(animated)
             scrRect.x = scrRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-            
-        destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
-        destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
-        destRect.w = transform->width * transform->scale;
-        destRect.h = transform->height * transform->scale;
+        
+        if (entity->hasComponent<TransformComponent>()){
+            destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
+            destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
+            destRect.w = transform->width * transform->scale;
+            destRect.h = transform->height * transform->scale;
+        }
     }
     
     void draw() override
@@ -103,8 +103,7 @@ public:
         scrRect.h = animations[animName].height;
         texture = animations[animName].sprite;
     }
-            
 };
 
 
-#endif /* GameSprite_hpp */
+#endif /* SpriteComponent_hpp */

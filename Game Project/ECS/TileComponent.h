@@ -3,7 +3,7 @@
 
 #include "ECS.hpp"
 #include "TransformComponent.hpp"
-#include "GameSprite.hpp"
+#include "SpriteComponent.hpp"
 #include <SDL2/SDL.h>
 #include "../TextureManager.hpp"
 

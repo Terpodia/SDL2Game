@@ -12,6 +12,14 @@ Vector2D::Vector2D(float x, float y)
     this->y = y;
 }
 
+float Vector2D::magnitude()
+{
+    float x = this->x;
+    float y = this->y;
+
+    return sqrt(x*x + y*y);
+}
+
 Vector2D& Vector2D::add(const Vector2D &vec)
 {
     this->x += vec.x;
